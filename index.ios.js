@@ -5,9 +5,7 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  Image,
   StyleSheet,
-  Text,
   View
 } from 'react-native';
 import {
@@ -17,10 +15,45 @@ import {
   Header,
   Title
 } from 'native-base';
+import { NavigationExperimental } from 'react-native';
+const {
+  StateUtils: NavigationStateUtils
+} = NavigationExperimental;
 
-import LoginForm from './components/loginform';
+import AppNavigator from './components/appnavigator';
 
 export default class AuthenticationExample extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      navigationState: {
+        index: 0,
+        routes: [{key: 'Login'}],
+      },
+    };
+
+    this.onNavigationChange = this.onNavigationChange.bind(this);
+  }
+
+  onNavigationChange(action) {
+    let { navigationState } = this.state;
+    console.log(action);
+    switch (action.type) {
+    case 'push':
+      navigationState = NavigationStateUtils.push(navigationState, { key: action.key});
+      break;
+    case 'pop':
+      navigationState = navigationState.index > 0 ?
+        NavigationStateUtils.pop(navigationState) : navigationState;
+      break;
+    }
+
+    if (this.state.navigationState !== navigationState) {
+      this.setState({navigationState});
+    }
+  }
+
   render() {
     return (
       <Container style={styles.container}>
@@ -28,13 +61,10 @@ export default class AuthenticationExample extends Component {
           <Title>Amazing app</Title>
         </Header>
         <Content contentContainerStyle={{flex: 1, justifyContent: 'center'}}>
-          <View style={styles.imageContainer}>
-            <Image
-              style={styles.logo}
-              source={require('./images/doge.png')}
-            />
-          </View>
-          <LoginForm/>
+          <AppNavigator
+            navigationState={this.state.navigationState}
+            onNavigationChange={this.onNavigationChange}
+          />
         </Content>
       </Container>
     );
@@ -43,17 +73,7 @@ export default class AuthenticationExample extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF'
-  },
-  imageContainer: {
-    flex: 1,
-    justifyContent: 'center'
-  },
-  logo: {
-    alignSelf: 'center',
-    width: 100,
-    height: 100
+    flex: 1
   }
 });
 

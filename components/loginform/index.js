@@ -35,7 +35,9 @@ export default class LoginForm extends Component {
             </InputGroup>
           </ListItem>
         </List>
-        <Button block primary style={styles.btn}>Login</Button>
+        <Button block primary style={styles.btn} onPress={this.props.onPushRoute}>
+          Login
+        </Button>
       </View>
     );
   }
