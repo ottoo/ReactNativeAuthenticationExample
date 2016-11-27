@@ -8,6 +8,11 @@ import { NavigationExperimental } from 'react-native';
 
 import LoginForm from './../../loginform';
 
+const route = {
+  key: 'Main',
+  title: 'Main'
+};
+
 export default class LoginScene extends Component {
   constructor(props, context) {
     super(props, context);
@@ -24,7 +29,7 @@ export default class LoginScene extends Component {
             source={require('./../../../images/doge.png')}
           />
         </View>
-        <LoginForm onPushRoute={onPushRoute}/>
+        <LoginForm onPushRoute={onPushRoute.bind(this, route)}/>
       </View>
     );
   }
