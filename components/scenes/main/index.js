@@ -16,7 +16,9 @@ export default class MainScene extends Component {
     return (
       <View style={styles.container}>
         <Text>Moi</Text>
-        <Button primary onPress={onPopRoute}>Back</Button>
+        <Button primary onPress={onPopRoute}>
+          <Text>Back</Text>
+        </Button>
       </View>
     );
   }

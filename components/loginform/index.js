@@ -4,7 +4,6 @@
 
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   View
 } from 'react-native';
 import {
@@ -14,7 +13,8 @@ import {
   Input,
   InputGroup,
   List,
-  ListItem
+  ListItem,
+  Text
 } from 'native-base';
 
 export default class LoginForm extends Component {
@@ -36,14 +36,14 @@ export default class LoginForm extends Component {
           </ListItem>
         </List>
         <Button block primary style={styles.btn} onPress={this.props.onPushRoute}>
-          Login
+          <Text>Login</Text>
         </Button>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const styles = {
   btn: {
     borderRadius: 0,
     marginTop: 20
@@ -58,4 +58,4 @@ const styles = StyleSheet.create({
   listItem: {
     marginBottom: 25
   }
-});
+};
