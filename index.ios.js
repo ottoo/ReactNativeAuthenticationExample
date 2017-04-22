@@ -1,7 +1,6 @@
 /**
  * @flow
  */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -10,13 +9,12 @@ import {
 import {
   Container,
   Content,
-  Header,
   StyleProvider,
   Title
 } from 'native-base';
 import { Provider } from 'react-redux';
 
-import AppNavigator from './components/appnavigator';
+import AppNavigatorWithState from './components/AppNavigatorWithState';
 import configureStore from './store';
 
 import getTheme from './native-base-theme/components';
@@ -34,11 +32,8 @@ export default class AuthenticationExample extends Component {
       <Provider store={store}>
         <StyleProvider style={getTheme(platform)}>
           <Container style={styles.container}>
-              <Header>
-                <Title>Amazing app</Title>
-              </Header>
               <Content contentContainerStyle={{flex: 1, justifyContent: 'center'}}>
-                  <AppNavigator/>
+                  <AppNavigatorWithState/>
               </Content>
           </Container>
         </StyleProvider>

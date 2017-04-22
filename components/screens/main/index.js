@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
   View
 } from 'react-native';
 import { Button } from 'native-base';
+import { NavigationActions } from 'react-navigation';
+import autobind from 'autobind-decorator';
 
-export default class MainScene extends Component {
+export default class MainScreen extends Component {
+  static navigationOptions = {
+      title: 'Welcome'
+  }
+
   constructor(props, context) {
     super(props, context);
   }
 
+  @autobind
+  goBack() {
+    this.props.navigation.dispatch(
+      NavigationActions.back()
+    );
+  }
+
   render() {
-    const { onPopRoute } = this.props;
     return (
       <View style={styles.container}>
         <Text>Moi</Text>
-        <Button primary onPress={onPopRoute}>
+        <Button primary onPress={this.goBack}>
           <Text>Back</Text>
         </Button>
       </View>
@@ -24,8 +35,8 @@ export default class MainScene extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1
   }
-});
+};

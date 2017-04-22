@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import navigationReducer from './navigationReducer'
 
 const rootReducer = combineReducers({
-  navigationReducer
+  navigation: navigationReducer
 });
 
 export default rootReducer;
