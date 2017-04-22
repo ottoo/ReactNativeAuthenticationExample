@@ -10,9 +10,8 @@
     "native-base": "2.1.2",
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.4",
-    "react-redux": "4.4.6",
-    "redux": "3.6.0",
-    "tcomb-form-native": "0.6.1"
+    "react-redux": "5.0.4",
+    "redux": "3.6.0"
   },
   "jest": {
     "preset": "react-native"
