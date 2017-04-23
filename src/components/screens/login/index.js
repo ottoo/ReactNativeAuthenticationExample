@@ -1,5 +1,7 @@
+/* eslint-disable global-require */
+
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   Image,
   View
@@ -7,15 +9,31 @@ import {
 import { NavigationActions } from 'react-navigation';
 import autobind from 'autobind-decorator';
 
-import LoginForm from './../../loginform';
+import LoginForm from './../../LoginForm';
+
+const styles = {
+  container: {
+    backgroundColor: '#F5FCFF',
+    flex: 1
+  },
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  logo: {
+    alignSelf: 'center',
+    width: 100,
+    height: 100
+  }
+};
 
 export default class LoginScreen extends Component {
   static navigationOptions = {
     title: 'Login'
   }
 
-  constructor(props, context) {
-    super(props, context);
+  static propTypes = {
+    navigation: PropTypes.object.isRequired
   }
 
   @autobind
@@ -36,24 +54,8 @@ export default class LoginScreen extends Component {
             source={require('./../../../images/doge.png')}
           />
         </View>
-        <LoginForm onSubmit={this.login}/>
+        <LoginForm onSubmit={this.login} />
       </View>
     );
   }
 }
-
-const styles = {
-  container: {
-    backgroundColor: '#F5FCFF',
-    flex: 1
-  },
-  imageContainer: {
-    flex: 1,
-    justifyContent: 'center'
-  },
-  logo: {
-    alignSelf: 'center',
-    width: 100,
-    height: 100
-  }
-};

@@ -1,14 +1,13 @@
 /**
  * @flow
  */
-
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   View
 } from 'react-native';
 import {
   Button,
-  Content,
   Icon,
   Input,
   InputGroup,
@@ -16,32 +15,6 @@ import {
   ListItem,
   Text
 } from 'native-base';
-
-export default class LoginForm extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <List>
-          <ListItem style={styles.listItem}>
-            <InputGroup>
-                <Icon name="ios-person" style={styles.icon} />
-                <Input placeholder="EMAIL" />
-            </InputGroup>
-          </ListItem>
-          <ListItem style={styles.listItem}>
-            <InputGroup>
-                <Icon name="ios-unlock" style={styles.icon} />
-                <Input placeholder="PASSWORD" secureTextEntry />
-            </InputGroup>
-          </ListItem>
-        </List>
-        <Button block primary style={styles.btn} onPress={this.props.onSubmit}>
-          <Text>Login</Text>
-        </Button>
-      </View>
-    );
-  }
-}
 
 const styles = {
   btn: {
@@ -59,3 +32,31 @@ const styles = {
     marginBottom: 25
   }
 };
+
+const LoginForm = props => (
+  <View style={styles.container}>
+    <List>
+      <ListItem style={styles.listItem}>
+        <InputGroup>
+          <Icon name="ios-person" style={styles.icon} />
+          <Input placeholder="EMAIL" />
+        </InputGroup>
+      </ListItem>
+      <ListItem style={styles.listItem}>
+        <InputGroup>
+          <Icon name="ios-unlock" style={styles.icon} />
+          <Input placeholder="PASSWORD" secureTextEntry />
+        </InputGroup>
+      </ListItem>
+    </List>
+    <Button block primary style={styles.btn} onPress={props.onSubmit}>
+      <Text>Login</Text>
+    </Button>
+  </View>
+);
+
+LoginForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+};
+
+export default LoginForm;

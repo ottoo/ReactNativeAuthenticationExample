@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Text,
   View
@@ -7,13 +8,19 @@ import { Button } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import autobind from 'autobind-decorator';
 
+const styles = {
+  container: {
+    flex: 1
+  }
+};
+
 export default class MainScreen extends Component {
   static navigationOptions = {
-      title: 'Welcome'
+    title: 'Welcome'
   }
 
-  constructor(props, context) {
-    super(props, context);
+  static propTypes = {
+    navigation: PropTypes.object.isRequired
   }
 
   @autobind
@@ -34,9 +41,3 @@ export default class MainScreen extends Component {
     );
   }
 }
-
-const styles = {
-  container: {
-    flex: 1
-  }
-};
