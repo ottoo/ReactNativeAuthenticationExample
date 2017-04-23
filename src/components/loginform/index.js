@@ -1,7 +1,7 @@
 /**
  * @flow
  */
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   View
@@ -15,6 +15,7 @@ import {
   ListItem,
   Text
 } from 'native-base';
+import autobind from 'autobind-decorator';
 
 const styles = {
   btn: {
@@ -33,30 +34,53 @@ const styles = {
   }
 };
 
-const LoginForm = props => (
-  <View style={styles.container}>
-    <List>
-      <ListItem style={styles.listItem}>
-        <InputGroup>
-          <Icon name="ios-person" style={styles.icon} />
-          <Input placeholder="EMAIL" />
-        </InputGroup>
-      </ListItem>
-      <ListItem style={styles.listItem}>
-        <InputGroup>
-          <Icon name="ios-unlock" style={styles.icon} />
-          <Input placeholder="PASSWORD" secureTextEntry />
-        </InputGroup>
-      </ListItem>
-    </List>
-    <Button block primary style={styles.btn} onPress={props.onSubmit}>
-      <Text>Login</Text>
-    </Button>
-  </View>
-);
+export default class LoginForm extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired
+  }
 
-LoginForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-};
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: ''
+    };
+  }
 
-export default LoginForm;
+  @autobind
+  submit() {
+    this.props.onSubmit(this.state);
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <List>
+          <ListItem style={styles.listItem}>
+            <InputGroup>
+              <Icon name="ios-person" style={styles.icon} />
+              <Input
+                autoCapitalize="none"
+                placeholder="Username"
+                onChangeText={(username) => this.setState({ username })}
+              />
+            </InputGroup>
+          </ListItem>
+          <ListItem style={styles.listItem}>
+            <InputGroup>
+              <Icon name="ios-unlock" style={styles.icon} />
+              <Input
+                placeholder="Password"
+                secureTextEntry
+                onChangeText={(password) => this.setState({ password })}
+              />
+            </InputGroup>
+          </ListItem>
+        </List>
+        <Button block primary style={styles.btn} onPress={this.submit}>
+          <Text>Login</Text>
+        </Button>
+      </View>
+    );
+  }
+}

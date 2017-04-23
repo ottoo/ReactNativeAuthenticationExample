@@ -1,15 +1,16 @@
 /* eslint-disable global-require */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   Image,
   View
 } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import autobind from 'autobind-decorator';
 
 import LoginForm from './../../LoginForm';
+import { AUTHENTICATE } from './../../../actions/authentication';
 
 const styles = {
   container: {
@@ -27,22 +28,26 @@ const styles = {
   }
 };
 
+@connect(null, dispatch => ({
+  authenticate({ username, password }) {
+    dispatch(AUTHENTICATE({ username, password }));
+  }
+}))
 export default class LoginScreen extends Component {
   static navigationOptions = {
     title: 'Login'
   }
 
   static propTypes = {
-    navigation: PropTypes.object.isRequired
+    authenticate: PropTypes.func.isRequired
   }
 
   @autobind
-  login() {
-    this.props.navigation.dispatch(
-      NavigationActions.navigate({
-        routeName: 'Main'
-      })
-    );
+  login({ username, password }) {
+    this.props.authenticate({
+      username,
+      password
+    });
   }
 
   render() {
@@ -54,7 +59,9 @@ export default class LoginScreen extends Component {
             source={require('./../../../images/doge.png')}
           />
         </View>
-        <LoginForm onSubmit={this.login} />
+        <LoginForm
+          onSubmit={this.login}
+        />
       </View>
     );
   }
