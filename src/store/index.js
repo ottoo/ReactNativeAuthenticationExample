@@ -1,10 +1,16 @@
 /* eslint-disable global-require */
 
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+
+import loggerMiddleware from './../middleware/logger';
 import rootReducer from './../reducers';
 
 export default function configureStore() {
-  const store = createStore(rootReducer);
+  const store = createStore(rootReducer, {}, applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+  ));
 
   if (module.hot) {
     module.hot.accept(() => {
@@ -12,5 +18,8 @@ export default function configureStore() {
       store.replaceReducer(nextRootReducer);
     });
   }
+
+  store.subscribe(() => console.log(store.getState())); // eslint-disable-line
+
   return store;
 }

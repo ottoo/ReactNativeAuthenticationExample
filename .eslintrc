@@ -23,6 +23,7 @@
     "jest": true
   },
   "rules": {
+    "arrow-parens": "off",
     "no-unused-vars": "warn",
     "react/prefer-stateless-function": "warn",
     "react/jsx-filename-extension": "off",
